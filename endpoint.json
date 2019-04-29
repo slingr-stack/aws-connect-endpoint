@@ -1,0 +1,90 @@
+{
+    "label": "AWS Connect",
+    "name": "aws-connect",
+    "apiVersion": "v1",
+    "internal": false,
+    "configurationType": "GLOBAL",
+    "deployment": {
+        "profiles":[
+            {
+                "name": "default",
+                "label": "Default",
+                "memory": 256,
+                "description": "Default configuration"
+            }
+        ],
+        "allowMultipleInstances": true
+    },
+    "icon48": "https://storage.googleapis.com/static.slingrs.io/platform/endpoints/aws-connect.png",
+    "status": "ACTIVE",
+    "stores": [],
+    "events": [
+        {
+            "label": "Stream Response",
+            "name": "streamResponse"
+        }
+    ],
+    "functions": [
+        {
+            "label": "HTTP GET",
+            "name": "_httpGet"
+        },
+        {
+            "label": "HTTP DELETE",
+            "name": "_httpDelete"
+        },
+        {
+            "label": "HTTP POST",
+            "name": "_httpPost"
+        },
+        {
+            "label": "HTTP PUT",
+            "name": "_httpPut"
+        },
+        {
+            "label": "HTTP request to kinesis video",
+            "name": "_kinesisRequest"
+        },
+        {
+            "label": "HTTP GET stream",
+            "name": "_getStream",
+            "callbacks": [
+                {
+                    "name": "streamResponse",
+                    "maxWaitingTime": 120000,
+                    "maxExpectedResponses": 1
+                }
+            ]
+        }
+    ],
+    "scripts":[
+        "kinesis.js",
+        "functions.js"
+    ],
+    "configuration":[
+        {
+            "name": "accessKey",
+            "label": "AWS Access Key",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "secretAccessKey",
+            "label": "AWS Secret Access Key",
+            "type": "password",
+            "required": true
+        },
+        {
+            "name": "region",
+            "label": "AWS Region",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "instanceId",
+            "label": "Instance ID",
+            "type": "text",
+            "required": true
+        }
+    ]
+}
